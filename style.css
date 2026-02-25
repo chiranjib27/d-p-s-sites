@@ -1,0 +1,762 @@
+:root {
+    --primary-color: #4a0404;
+    --secondary-color: #d4af37;
+    --dark-bg: #1a1a1a;
+    --light-bg: #faf9f6;
+    --text-dark: #333333;
+    --text-light: #f5f5f5;
+
+    --font-heading: 'Playfair Display', serif;
+    --font-script: 'Great Vibes', cursive;
+    --font-body: 'Lato', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+/* Preloader / Intro Game */
+.enter-btn {
+    padding: 12px 30px;
+    background: transparent;
+    color: var(--secondary-color);
+    border: 2px solid var(--secondary-color);
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.enter-btn:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+#intro-game {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--dark-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
+.game-content {
+    text-align: center;
+    background: rgba(26, 26, 26, 0.8);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--secondary-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.game-content h2 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.game-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.puzzle-board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 2px;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 20px auto;
+    background: var(--secondary-color);
+    padding: 2px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.puzzle-piece {
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark-bg);
+    background-image: url('DSC08249.jpg');
+    background-size: 300px 300px;
+    /* Must match .puzzle-board width/height */
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    border-radius: 5px;
+}
+
+.puzzle-piece:hover {
+    filter: brightness(1.1);
+}
+
+/* Background positions for each piece */
+.piece-0 {
+    background-position: 0 0;
+}
+
+.piece-1 {
+    background-position: -148px 0;
+}
+
+.piece-2 {
+    background-position: 0 -148px;
+}
+
+.piece-3 {
+    background-position: -148px -148px;
+}
+
+.puzzle-piece.selected {
+    border: 3px solid var(--secondary-color);
+    transform: scale(0.92);
+    box-shadow: 0 0 15px var(--secondary-color);
+}
+
+/* Typography & Layout */
+section {
+    padding: 100px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+}
+
+.section-header .date {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    height: 1px;
+    width: 60px;
+    background: var(--secondary-color);
+    margin: 0 15px;
+}
+
+.divider i {
+    color: var(--secondary-color);
+    font-size: 1.5rem;
+}
+
+.light-section {
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+}
+
+.light-section .section-header h2 {
+    color: var(--primary-color);
+}
+
+.light-section .section-header .date {
+    color: var(--text-dark);
+}
+
+.divider.gold::before,
+.divider.gold::after {
+    background: var(--primary-color);
+}
+
+.divider.gold i {
+    color: var(--primary-color);
+}
+
+/* Navigation */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    background: rgba(26, 26, 26, 0.95);
+    padding: 15px 50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-family: var(--font-script);
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+.hamburger {
+    display: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    height: 150vh;
+    background: url('DSC08189.jpg') center center no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(26, 26, 26, 0.9));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: var(--text-light);
+}
+
+.hero .subtitle {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.hero .title {
+    font-family: var(--font-script);
+    font-size: 6rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero .names {
+    font-size: 3rem;
+    font-family: var(--font-heading);
+    margin-top: 10px;
+}
+
+.scroll-down {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    cursor: pointer;
+    animation: bounce 2s infinite;
+}
+
+.scroll-down p {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+@keyframes bounce {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0) translateX(-50%);
+    }
+
+    40% {
+        transform: translateY(-20px) translateX(-50%);
+    }
+
+    60% {
+        transform: translateY(-10px) translateX(-50%);
+    }
+}
+
+/* Ring Ceremony */
+.ceremony-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.ceremony-text {
+    flex: 1;
+}
+
+.ceremony-text h3 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.ceremony-text p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.ceremony-images {
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+.img-wrapper {
+    width: 50%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.img-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.offset-img {
+    margin-top: 50px;
+}
+
+/* Wedding (TBA) */
+.wedding-section {
+    background: url('DSC08187.jpg') center/cover no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    padding: 150px 0;
+}
+
+.wedding-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(250, 249, 246, 0.85);
+    /* Light overlay */
+}
+
+.wedding-card {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.wedding-card .card-inner {
+    border: 2px dashed var(--secondary-color);
+    padding: 40px 20px;
+    border-radius: 10px;
+}
+
+.wedding-card h2 {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.tba-text {
+    font-family: var(--font-script);
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.wedding-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.countdown-placeholder {
+    display: inline-block;
+    padding: 10px 30px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Dynamic Video Section */
+.video-section {
+    background-color: var(--dark-bg);
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.video-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--secondary-color);
+    background: #000;
+}
+
+.drop-zone {
+    max-width: 500px;
+    height: 150px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--secondary-color);
+    border: 2px dashed var(--secondary-color);
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: rgba(26, 26, 26, 0.8);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.drop-zone.dragover {
+    border-style: solid;
+    background-color: rgba(212, 175, 55, 0.1);
+    transform: scale(1.02);
+}
+
+.drop-zone-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.delete-video-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.delete-video-btn:hover {
+    background: red;
+    transform: scale(1.1);
+}
+
+/* Gallery Section */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item::after {
+    content: '\f00e';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(74, 4, 4, 0.7);
+    color: #fff;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 80vh;
+    animation: zoom 0.6s;
+    border: 5px solid #fff;
+    border-radius: 5px;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-lightbox:hover,
+.close-lightbox:focus {
+    color: var(--secondary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: #111;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: var(--font-script);
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+footer p {
+    color: #888;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .hero .title {
+        font-size: 4.5rem;
+    }
+
+    .ceremony-content {
+        flex-direction: column;
+    }
+
+    .ceremony-images {
+        width: 100%;
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 20px;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(26, 26, 26, 0.95);
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        margin: 15px 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hero .title {
+        font-size: 3.5rem;
+    }
+
+    .img-wrapper {
+        width: 100%;
+    }
+
+    .offset-img {
+        margin-top: 0;
+        display: none;
+    }
+
+    .tba-text {
+        font-size: 2.5rem;
+    }
+
+    .wedding-card {
+        padding: 20px;
+    }
+}

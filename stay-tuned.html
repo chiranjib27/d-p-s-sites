@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Tuned - Deepak & Pratiksha</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* Specific Styles for Stay Tuned Page */
+        .stay-tuned-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(74, 4, 4, 0.8)), url('DSC08187.jpg') center/cover no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stay-tuned-content {
+            text-align: center;
+            z-index: 2;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--secondary-color);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.3), inset 0 0 20px rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(10px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .stay-tuned-content h1 {
+            font-family: var(--font-script);
+            font-size: 5rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .stay-tuned-content p {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            border-radius: 30px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-btn:hover {
+            background: var(--secondary-color);
+            color: var(--dark-bg);
+            box-shadow: 0 0 20px var(--secondary-color);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.5), 0 0 20px rgba(212, 175, 55, 0.5);
+            }
+
+            to {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 1), 0 0 30px rgba(212, 175, 55, 0.8);
+            }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: rise 10s infinite linear;
+        }
+
+        @keyframes rise {
+            0% {
+                bottom: -10%;
+                transform: translateX(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                bottom: 110%;
+                transform: translateX(100px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">D & P</div>
+        <ul class="nav-links">
+            <li><a href="design.html#home">Home</a></li>
+            <li><a href="design.html#ceremony">Ceremony</a></li>
+            <li><a href="design.html#wedding">Wedding</a></li>
+            <li><a href="design.html#moments">Moments</a></li>
+            <li><a href="design.html#gallery">Gallery</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Stay Tuned Section -->
+    <section class="stay-tuned-section">
+        <div class="particles" id="particles"></div>
+        <div class="stay-tuned-content" data-aos="zoom-in">
+            <h1>Stay Tuned</h1>
+            <p>Something magical is in the works.<br>We are meticulously planning the details of our big day.</p>
+            <p style="font-style: italic; font-size: 1.2rem; color: #ccc;">More updates coming soon!</p>
+            <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i> Return</a>
+        </div>
+    </section>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Generate glowing floating particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            let particle = document.createElement('div');
+            particle.classList.add('particle');
+
+            // Randomize size, position, and animation timing
+            let size = Math.random() * 8 + 2; // 2px to 10px
+            let leftPos = Math.random() * 100;
+            let animDuration = Math.random() * 10 + 5; // 5s to 15s
+            let animDelay = Math.random() * 5;
+
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = leftPos + '%';
+            particle.style.animationDuration = animDuration + 's';
+            particle.style.animationDelay = animDelay + 's';
+
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+
+</html>

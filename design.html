@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Beautiful Beginning</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Intro Game -->
+    <div id="intro-game">
+        <div class="game-content">
+            <h2>Unlock the Invitation</h2>
+            <p>Swap the pieces to reveal the image, or skip if you need support.</p>
+            <div class="puzzle-board" id="puzzle-board">
+                <!-- JS will inject pieces here -->
+            </div>
+            <button class="enter-btn" onclick="skipPuzzle()">Skip Puzzle (Support)</button>
+        </div>
+    </div>
+
+    <!-- Main Content wrapper (Hidden initially) -->
+    <div id="main-content" style="display: none; opacity: 0; transition: opacity 1s ease;">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">D & P</div> <!-- Updated Names -->
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#ring-ceremony">The Ring</a></li>
+                <li><a href="#wedding">The Wedding</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content" data-aos="zoom-in" data-aos-duration="1500">
+                <h3 class="subtitle">We Are Getting Married</h3>
+                <h1 class="title">Save The Date</h1>
+                <p class="names">Deepak & Pratiksha</p>
+                <div class="scroll-down">
+                    <p>Scroll to discover</p>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="hero-overlay"></div>
+        </section>
+
+        <!-- The Ring Ceremony -->
+        <section id="ring-ceremony" class="ceremony-section dark-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>The Ring Ceremony</h2>
+                    <div class="divider">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <p class="date">March 8, 2026</p>
+                </div>
+
+                <div class="ceremony-content">
+                    <div class="ceremony-text" data-aos="fade-right">
+                        <h3>Two rings, one promise</h3>
+                        <p>Join us as we take the first step towards our forever. Surrounded by our closest family and
+                            friends, we exchanged rings and promises of a lifetime together.</p>
+                    </div>
+                    <div class="ceremony-images" data-aos="fade-left">
+                        <div class="img-wrapper">
+                            <!-- Placeholder images -->
+                            <img src="ring.webp" alt="Ring Ceremony 1" class="img-1">
+                        </div>
+                        <div class="img-wrapper offset-img">
+                            <img src="DSC08161.jpg" alt="Ring Ceremony 2" class="img-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Wedding (Date To Be Announced) -->
+        <section id="wedding" class="wedding-section light-section">
+            <div class="container">
+                <div class="wedding-card" data-aos="flip-left" data-aos-duration="1000">
+                    <div class="card-inner">
+                        <h2>The Big Day</h2>
+                        <div class="divider gold">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3 class="tba-text">Date To Be Announced</h3>
+                        <p>The best is yet to come. We are finalizing the details for our special day and can't wait to
+                            share it with you soon.</p>
+                        <a href="stay-tuned.html" class="countdown-placeholder"
+                            style="text-decoration: none; display: inline-block;">
+                            <i class="far fa-calendar-alt"></i> Stay Tuned
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Moments Section -->
+        <section id="moments" class="video-section dark-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Video Moments</h2>
+                    <div class="divider">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <p>Watch our favorite memories together</p>
+                </div>
+
+                <!-- Admin Controls (For adding videos) -->
+                <div class="video-controls" data-aos="fade-up" style="text-align: center; margin-bottom: 30px;">
+                    <div id="drop-zone" class="drop-zone">
+                        <span class="drop-zone-text">Drag and drop your video file here or click to browse</span>
+                        <input type="file" id="video-file-input" accept="video/*" class="drop-zone-input"
+                            onchange="handleFileSelect(event)">
+                    </div>
+                </div>
+
+                <!-- Video Grid -->
+                <div class="video-grid" id="video-grid" data-aos="zoom-in-up">
+                    <!-- Example Default Video -->
+                    <div class="video-item">
+                        <iframe width="100%" height="250" src="https://www.youtube.com/embed/ScMzIvxBSi4"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                        <button class="delete-video-btn" onclick="deleteVideo(this)"><i
+                                class="fas fa-trash"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery -->
+        <section id="gallery" class="gallery-section light-section">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Our Gallery</h2>
+                    <div class="divider gold">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+
+                <div class="gallery-grid">
+                    <!-- Placeholders -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                        <img src="DSC08113.jpg" alt="Gallery Image 1" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                        <img src="DSC08204.jpg" alt="Gallery Image 2" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                        <img src="DSC08192.jpg" alt="Gallery Image 3" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                        <img src="DSC08245.jpg" alt="Gallery Image 4" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="500">
+                        <img src="DSC08210.jpg" alt="Gallery Image 5" onclick="openLightbox(this.src)">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="600">
+                        <img src="DSC08238.jpg" alt="Gallery Image 6" onclick="openLightbox(this.src)">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <h2 class="footer-logo">D & P</h2>
+                <p>Made with love. We can't wait to celebrate with you.</p>
+            </div>
+        </footer>
+
+        <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+            <img class="lightbox-content" id="lightbox-img">
+        </div>
+
+    </div> <!-- End Main Content -->
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="node.js"></script>
+</body>
+
+</html>
