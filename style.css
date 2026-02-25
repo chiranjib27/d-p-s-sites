@@ -289,9 +289,11 @@ nav.scrolled {
 
 /* Hero Section */
 .hero {
-    height: 150vh;
+    aspect-ratio: 9 / 16;
+    height: auto;
+    min-height: 10vh;
     background: url('DSC08189.jpg') center center no-repeat;
-    background-size: cover;
+    background-size: contain;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -739,8 +741,23 @@ footer p {
         display: block;
     }
 
+    .hero {
+        aspect-ratio: auto;
+        min-height: 100vh;
+        background-position: center top;
+    }
+
     .hero .title {
-        font-size: 3.5rem;
+        font-size: 3rem;
+    }
+
+    .hero .names {
+        font-size: 2rem;
+    }
+
+    .hero .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 3px;
     }
 
     .img-wrapper {
